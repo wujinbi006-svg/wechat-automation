@@ -1,0 +1,24 @@
+{
+  "reference": {
+    "repository": "fanyuantaier/wechatauto-replica",
+    "local_source": "__USERPROFILE__/Documents/Codex/_ref_wechatauto_20260904",
+    "version": "1.2.0.3",
+    "basis": "source audit only; reference claims are not local verification"
+  },
+  "capabilities": [
+    {"capability": "uia_hot_activation", "reference_source": "wechatauto/uia_driver.py: _scan_qaccessible_active_rva, _hot_activate_accessibility", "current_source": "work/wechatauto_pkg/unzipped/wechatauto/uia_driver.py; src/uia_service.py: uia_fingerprint", "current_status": "PASSIVE_FINGERPRINT_AVAILABLE", "local_verification_required": true},
+    {"capability": "mmui_control_tree", "reference_source": "wechatauto/uia_driver.py: _find_main", "current_source": "src/uia_service.py: diagnostics", "current_status": "LIVE_VERIFIED"},
+    {"capability": "conversation_search", "reference_source": "wechatauto/uia_driver.py: open_chat", "current_source": "src/uia_service.py: search_chat", "current_status": "PASSIVE_VISIBLE_SESSION_SEARCH_ONLY", "local_verification_required": true},
+    {"capability": "conversation_open", "reference_source": "wechatauto/uia_driver.py: open_chat", "current_source": "src/uia_service.py: open_chat / interactive_open_chat", "current_status": "LIVE_VERIFIED_INTERACTIVE", "local_verification_required": false},
+    {"capability": "message_read", "reference_source": "wechatauto/db.py and wechatauto/uia_driver.py", "current_source": "src/uia_service.py: read_messages", "current_status": "LIVE_UIA_READ_ONLY"},
+    {"capability": "database_read", "reference_source": "wechatauto/db.py: WeChatDB", "current_source": null, "current_status": "NOT_IMPLEMENTED", "reason": "no verified local SQLCipher read plane"},
+    {"capability": "message_listener", "reference_source": "wechatauto/wx.py: DBListener", "current_source": "gateway supervisor message polling", "current_status": "UIA_POLLING_ONLY", "local_verification_required": true},
+    {"capability": "send_text", "reference_source": "wechatauto/uia_driver.py: send_text", "current_source": "src/service_api.py: send_message", "current_status": "EXECUTION_PATH_PRESENT_RESULT_UNVERIFIED", "local_verification_required": true},
+    {"capability": "send_image", "reference_source": "wechatauto/guia.py: send_image", "current_source": null, "current_status": "NOT_IMPLEMENTED"},
+    {"capability": "send_file", "reference_source": "wechatauto/guia.py: send_file", "current_source": null, "current_status": "NOT_IMPLEMENTED"},
+    {"capability": "reply_and_at", "reference_source": "wechatauto/guia.py: reply_msg, at_member", "current_source": null, "current_status": "NOT_IMPLEMENTED"},
+    {"capability": "moments", "reference_source": "wechatauto/moment.py", "current_source": null, "current_status": "NOT_IMPLEMENTED"},
+    {"capability": "multi_account", "reference_source": "wechatauto/db.py: list_accounts", "current_source": null, "current_status": "NOT_IMPLEMENTED"},
+    {"capability": "ocr_coordinate_fallback", "reference_source": "wechatauto/guia.py and wechatauto/moment.py", "current_source": null, "current_status": "NOT_IMPLEMENTED", "reason": "not part of passive monitoring; active fallback needs a separately controlled and verified implementation"}
+  ]
+}

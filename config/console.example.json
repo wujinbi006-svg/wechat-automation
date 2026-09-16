@@ -1,0 +1,8 @@
+{
+  "_comment": "模板文件。复制成 config/console.json 再改（setup.py 会自动复制）。这个文件保存控制台自己用的 API Key，只留在服务端，不会下发到浏览器。",
+  "_howto": "填好 api_key 后保存即可；控制台页面「API Key」区域也能改。该文件已在 .gitignore 中，不要提交、不要分享。",
+
+  "api_key": "PUT-YOUR-API-KEY-HERE",
+  "api_base": "https://api.deepseek.com/v1",
+  "model": "deepseek-flash"
+}

@@ -1,0 +1,1027 @@
+{
+ "generated_at": "2026-09-16T08:43:12",
+ "file_count": 204,
+ "total_bytes": 38390756,
+ "files": [
+  {
+   "path": ".gitignore",
+   "size": 1002,
+   "sha256": "4482037c1cae5476"
+  },
+  {
+   "path": "AI_DEPLOY_PROMPT.md",
+   "size": 6013,
+   "sha256": "85fde1170b7afccf"
+  },
+  {
+   "path": "api.py",
+   "size": 9443,
+   "sha256": "203d62da0cf19e22"
+  },
+  {
+   "path": "config/auto_reply.example.json",
+   "size": 4317,
+   "sha256": "8ae94fd998fa2cc8"
+  },
+  {
+   "path": "config/console.example.json",
+   "size": 474,
+   "sha256": "1b80e8a5d02c819f"
+  },
+  {
+   "path": "console/index.html",
+   "size": 20927,
+   "sha256": "a961e06344c20655"
+  },
+  {
+   "path": "console/server.py",
+   "size": 15379,
+   "sha256": "f18fccf447d591c7"
+  },
+  {
+   "path": "DEPLOY.md",
+   "size": 8800,
+   "sha256": "ba4ee368fe510779"
+  },
+  {
+   "path": "docs/ACCEPTANCE_MATRIX.md",
+   "size": 842,
+   "sha256": "420f13fe7f3a817f"
+  },
+  {
+   "path": "docs/ARCHITECTURE.md",
+   "size": 8787,
+   "sha256": "40d3e5accb3093ac"
+  },
+  {
+   "path": "docs/BASELINE.md",
+   "size": 11445,
+   "sha256": "b75cbe20daf35c96"
+  },
+  {
+   "path": "docs/CAPABILITIES.md",
+   "size": 608,
+   "sha256": "3d88e762a7c8446a"
+  },
+  {
+   "path": "docs/COMPONENT_MAP.md",
+   "size": 4930,
+   "sha256": "d4f65fb0eb18c4be"
+  },
+  {
+   "path": "docs/CURRENT_STATUS.md",
+   "size": 5400,
+   "sha256": "cd0cc432ccfa4094"
+  },
+  {
+   "path": "docs/DATABASE_KEY_RUNBOOK.md",
+   "size": 3285,
+   "sha256": "d733e1fe1924d5b1"
+  },
+  {
+   "path": "docs/DOUBAO_INTEGRATION.md",
+   "size": 1547,
+   "sha256": "a392831f2635668d"
+  },
+  {
+   "path": "docs/GATEWAY_RUNTIME.md",
+   "size": 1417,
+   "sha256": "12dc6ce98378c800"
+  },
+  {
+   "path": "docs/github_capability_matrix.json",
+   "size": 3241,
+   "sha256": "54993f504db25f0b"
+  },
+  {
+   "path": "docs/REFERENCE_CAPABILITY_MATRIX.md",
+   "size": 10140,
+   "sha256": "b4417ab1f1b78bd0"
+  },
+  {
+   "path": "docs/RUNTIME_MODEL.md",
+   "size": 3497,
+   "sha256": "59b52104fabd60fe"
+  },
+  {
+   "path": "docs/UIA_BACKGROUND_CAPABILITY.md",
+   "size": 3216,
+   "sha256": "ebed4f7c9b9e6788"
+  },
+  {
+   "path": "docs/WECHAT_AUTOMATION_MANUAL.md",
+   "size": 33412,
+   "sha256": "258109d0b6a2ada4"
+  },
+  {
+   "path": "docs/WECHAT_COMPATIBILITY.md",
+   "size": 4902,
+   "sha256": "9f98cadf5e55d2a1"
+  },
+  {
+   "path": "docs/WECHAT_DATABASE_INVESTIGATION.md",
+   "size": 4108,
+   "sha256": "de23a108b900b38b"
+  },
+  {
+   "path": "docs/WECHAT_DATABASE_VALIDATION.md",
+   "size": 1757,
+   "sha256": "59987f1a134a0242"
+  },
+  {
+   "path": "docs/WECHAT_KEY_CHAIN_DIFF.md",
+   "size": 584,
+   "sha256": "d76f0ad3967df99c"
+  },
+  {
+   "path": "docs/WECHAT_KEY_CHAIN_REFERENCE.md",
+   "size": 740,
+   "sha256": "9d81599e7abb2c60"
+  },
+  {
+   "path": "docs/WECHAT_KEY_DISCOVERY_DIFF.md",
+   "size": 1114,
+   "sha256": "a469732329369ed0"
+  },
+  {
+   "path": "docs/WECHAT_KEY_DISCOVERY_REFERENCE.md",
+   "size": 895,
+   "sha256": "2397926e80bbba5b"
+  },
+  {
+   "path": "docs/WECHAT_KEY_DISCOVERY_REPORT.md",
+   "size": 1354,
+   "sha256": "9952cc5a7209ff52"
+  },
+  {
+   "path": "docs/WECHAT_KEY_FORMAT.md",
+   "size": 480,
+   "sha256": "15de1af6d6f4ba52"
+  },
+  {
+   "path": "docs/WECHATAUTO_REPLICA_RESEARCH.md",
+   "size": 3734,
+   "sha256": "c021d70610bfb3e4"
+  },
+  {
+   "path": "docs/作品说明_微信自动化工具集.md",
+   "size": 7837,
+   "sha256": "7dc5b8e7eb3c4adc"
+  },
+  {
+   "path": "health_check.py",
+   "size": 5971,
+   "sha256": "1b67dbcaf8b4f3e0"
+  },
+  {
+   "path": "hook/.gitignore",
+   "size": 14,
+   "sha256": "8f773c270f5bc202"
+  },
+  {
+   "path": "hook/build/.gitignore",
+   "size": 63,
+   "sha256": "0f6a90c615af2359"
+  },
+  {
+   "path": "hook/build/wxwal10.dll",
+   "size": 191488,
+   "sha256": "99cc1a3290343287"
+  },
+  {
+   "path": "hook/capture_live.py",
+   "size": 1160,
+   "sha256": "cd38d01f93aad818"
+  },
+  {
+   "path": "hook/capture_paths.py",
+   "size": 1603,
+   "sha256": "6fa8e5fa57e05c10"
+  },
+  {
+   "path": "hook/daemon.py",
+   "size": 5438,
+   "sha256": "d961c0b4b7fbc20a"
+  },
+  {
+   "path": "hook/decrypt2.py",
+   "size": 4722,
+   "sha256": "1f7984019e9af37b"
+  },
+  {
+   "path": "hook/inject.py",
+   "size": 4482,
+   "sha256": "daf1cf8210a88ab0"
+  },
+  {
+   "path": "hook/install_daemon_task.ps1",
+   "size": 3286,
+   "sha256": "e25b47fb970295eb"
+  },
+  {
+   "path": "hook/probe_session_pipe.py",
+   "size": 3475,
+   "sha256": "5987cb1d84a465c1"
+  },
+  {
+   "path": "hook/README.md",
+   "size": 7201,
+   "sha256": "d23452e5eb7a12f6"
+  },
+  {
+   "path": "hook/run_hook_stack.py",
+   "size": 2940,
+   "sha256": "38c114cc6aa729c7"
+  },
+  {
+   "path": "hook/sqlite_record.py",
+   "size": 2563,
+   "sha256": "3d732c17f16cfebc"
+  },
+  {
+   "path": "hook/src/wxwal.c",
+   "size": 16074,
+   "sha256": "5d80832859653bdb"
+  },
+  {
+   "path": "hook/trigger_safe.py",
+   "size": 2376,
+   "sha256": "2fd7021674a8004e"
+  },
+  {
+   "path": "hook/uninstall_daemon_task.ps1",
+   "size": 1418,
+   "sha256": "d866e038cf397fb4"
+  },
+  {
+   "path": "hook/wal_capture.py",
+   "size": 9380,
+   "sha256": "fbffafd58f78579d"
+  },
+  {
+   "path": "hook/wal_sidecar.py",
+   "size": 10358,
+   "sha256": "649b79f2792f3a15"
+  },
+  {
+   "path": "interactive_agent.py",
+   "size": 13322,
+   "sha256": "bf0ccc9b1f016562"
+  },
+  {
+   "path": "LICENSE",
+   "size": 2050,
+   "sha256": "a56b1b142208b2bd"
+  },
+  {
+   "path": "licenses/Apache-2.0.txt",
+   "size": 11358,
+   "sha256": "cfc7749b96f63bd3"
+  },
+  {
+   "path": "pytest.ini",
+   "size": 239,
+   "sha256": "2e389c5713db363e"
+  },
+  {
+   "path": "README.md",
+   "size": 8096,
+   "sha256": "afdfc9ada290447e"
+  },
+  {
+   "path": "requirements.txt",
+   "size": 1161,
+   "sha256": "56293f04d3aad298"
+  },
+  {
+   "path": "scripts/auto_reply_livecheck.py",
+   "size": 5895,
+   "sha256": "ed3f949effacd337"
+  },
+  {
+   "path": "scripts/auto_reply_selftest.py",
+   "size": 19359,
+   "sha256": "e4f8e84c8a26129a"
+  },
+  {
+   "path": "scripts/diagnostics/database_inventory.ps1",
+   "size": 6110,
+   "sha256": "d7a5ef386a67dee4"
+  },
+  {
+   "path": "scripts/diagnostics/database_key_status.py",
+   "size": 2254,
+   "sha256": "4c505ca4a81f1d03"
+  },
+  {
+   "path": "scripts/diagnostics/dump_uia_tree.py",
+   "size": 6883,
+   "sha256": "0f1fb2e00d4a2084"
+  },
+  {
+   "path": "scripts/diagnostics/foreground_monitor_60s.py",
+   "size": 6140,
+   "sha256": "84e87012c3e30644"
+  },
+  {
+   "path": "scripts/diagnostics/full_tree_scan.ps1",
+   "size": 709,
+   "sha256": "e86d72ad517f7957"
+  },
+  {
+   "path": "scripts/diagnostics/investigate_key_discovery.py",
+   "size": 3408,
+   "sha256": "2c080115aa32ca73"
+  },
+  {
+   "path": "scripts/diagnostics/key_chain_probe.py",
+   "size": 1010,
+   "sha256": "d55ac747958a866c"
+  },
+  {
+   "path": "scripts/diagnostics/key_memory_probe.py",
+   "size": 1266,
+   "sha256": "36e4d73657854b2c"
+  },
+  {
+   "path": "scripts/diagnostics/observe_foreground_navigation.ps1",
+   "size": 3338,
+   "sha256": "fc77db9f5b6cfad3"
+  },
+  {
+   "path": "scripts/diagnostics/resolve_friend.py",
+   "size": 3951,
+   "sha256": "a6746484468eff92"
+  },
+  {
+   "path": "scripts/diagnostics/test_chat_input_dynamic.ps1",
+   "size": 13256,
+   "sha256": "2ba54d7f3c4c5c5b"
+  },
+  {
+   "path": "scripts/diagnostics/test_chat_input_dynamic.py",
+   "size": 12862,
+   "sha256": "2c931cb920d1a609"
+  },
+  {
+   "path": "scripts/diagnostics/test_database_read.py",
+   "size": 6124,
+   "sha256": "77df05093d4e2f20"
+  },
+  {
+   "path": "scripts/export_chat_full.py",
+   "size": 8757,
+   "sha256": "41212a7aa20f738f"
+  },
+  {
+   "path": "scripts/export_chat_txt.py",
+   "size": 5676,
+   "sha256": "21af5088c2d43642"
+  },
+  {
+   "path": "scripts/install_interactive_agent_task.ps1",
+   "size": 582,
+   "sha256": "599a39ce57fc1dc6"
+  },
+  {
+   "path": "scripts/install_service.ps1",
+   "size": 561,
+   "sha256": "c0327b123526b6b8"
+  },
+  {
+   "path": "scripts/interactive_agent_watchdog.py",
+   "size": 2878,
+   "sha256": "3c674e774b5c27b1"
+  },
+  {
+   "path": "scripts/long_run_test.py",
+   "size": 1455,
+   "sha256": "8ed75adbb66d193b"
+  },
+  {
+   "path": "scripts/run_background_type_experiment.py",
+   "size": 1652,
+   "sha256": "da62456b5bc43d1a"
+  },
+  {
+   "path": "scripts/run_live_e2e.py",
+   "size": 2237,
+   "sha256": "ce299c7c3ede19a1"
+  },
+  {
+   "path": "scripts/run_live_read_messages.py",
+   "size": 1372,
+   "sha256": "82a38a4d5670a36f"
+  },
+  {
+   "path": "scripts/run_live_regression.py",
+   "size": 914,
+   "sha256": "9a2cacd3248c3eac"
+  },
+  {
+   "path": "scripts/scan_send_button.py",
+   "size": 1582,
+   "sha256": "6bd38c6a6dc790b7"
+  },
+  {
+   "path": "scripts/send_file_verified.py",
+   "size": 3730,
+   "sha256": "85a5d5d0d9185fa0"
+  },
+  {
+   "path": "scripts/send_loop.py",
+   "size": 7310,
+   "sha256": "911758712b328e9c"
+  },
+  {
+   "path": "scripts/send_loop_varied.py",
+   "size": 8924,
+   "sha256": "1059b531270a7dfa"
+  },
+  {
+   "path": "scripts/send_verified.py",
+   "size": 4240,
+   "sha256": "8c188b134de7eb0b"
+  },
+  {
+   "path": "scripts/service_preflight.ps1",
+   "size": 2159,
+   "sha256": "04212ba53a47162c"
+  },
+  {
+   "path": "scripts/service_status.ps1",
+   "size": 174,
+   "sha256": "3aa6bd7b0966dafc"
+  },
+  {
+   "path": "scripts/start_gateway.ps1",
+   "size": 607,
+   "sha256": "5e32664a356ad2ce"
+  },
+  {
+   "path": "scripts/start_interactive_agent.ps1",
+   "size": 390,
+   "sha256": "3b6a899ee325e627"
+  },
+  {
+   "path": "scripts/test_event_stream.py",
+   "size": 513,
+   "sha256": "104de12a99b4e41d"
+  },
+  {
+   "path": "scripts/test_gateway_recovery.py",
+   "size": 639,
+   "sha256": "c83a6d0a7ac2e137"
+  },
+  {
+   "path": "scripts/uia_navigation_benchmark.py",
+   "size": 1795,
+   "sha256": "16e0a2c1507c6983"
+  },
+  {
+   "path": "scripts/uninstall_service.ps1",
+   "size": 228,
+   "sha256": "35f0f7b9e5c89ace"
+  },
+  {
+   "path": "scripts/verify/count_chat_rows.py",
+   "size": 869,
+   "sha256": "1c09f968f5817b54"
+  },
+  {
+   "path": "scripts/verify/find_alias.py",
+   "size": 1452,
+   "sha256": "e8695edd760ca391"
+  },
+  {
+   "path": "scripts/verify/learn_probe.py",
+   "size": 1306,
+   "sha256": "79d8d43c7681529e"
+  },
+  {
+   "path": "scripts/verify/probe_agent_state.py",
+   "size": 343,
+   "sha256": "1fdef13a515b0f93"
+  },
+  {
+   "path": "scripts/verify/probe_target.py",
+   "size": 909,
+   "sha256": "581b5e469f7bbf02"
+  },
+  {
+   "path": "scripts/verify/probe_uid.py",
+   "size": 1203,
+   "sha256": "607051596d2d90b1"
+  },
+  {
+   "path": "scripts/verify/send_verified.py",
+   "size": 3217,
+   "sha256": "7c25122193c0714d"
+  },
+  {
+   "path": "scripts/verify/verify_manual.py",
+   "size": 3983,
+   "sha256": "e26126ff3b8c73f1"
+  },
+  {
+   "path": "scripts/verify/verify_tools.py",
+   "size": 2150,
+   "sha256": "8b0e5453dff2ce01"
+  },
+  {
+   "path": "SECRETS.md",
+   "size": 11403,
+   "sha256": "2ca4271d36b0eeb5"
+  },
+  {
+   "path": "SECURITY.md",
+   "size": 6867,
+   "sha256": "609835d6ff40101b"
+  },
+  {
+   "path": "service/WeChatGateway.exe",
+   "size": 18243033,
+   "sha256": "05b82d46ad331cc1"
+  },
+  {
+   "path": "service/WinSW.exe",
+   "size": 18243033,
+   "sha256": "05b82d46ad331cc1"
+  },
+  {
+   "path": "setup.py",
+   "size": 16624,
+   "sha256": "a1ded15c74a8da74"
+  },
+  {
+   "path": "src/__init__.py",
+   "size": 52,
+   "sha256": "0f5f73ff10ae75af"
+  },
+  {
+   "path": "src/auto_reply/__init__.py",
+   "size": 985,
+   "sha256": "d9507d14d7e6491a"
+  },
+  {
+   "path": "src/auto_reply/engine.py",
+   "size": 32276,
+   "sha256": "93dfe0852337a71c"
+  },
+  {
+   "path": "src/auto_reply/llm.py",
+   "size": 8456,
+   "sha256": "db19f1adf4f78c98"
+  },
+  {
+   "path": "src/auto_reply/policy.py",
+   "size": 9807,
+   "sha256": "f5f95a6eccf20424"
+  },
+  {
+   "path": "src/chat_archiver.py",
+   "size": 26074,
+   "sha256": "4ca60f903f033d04"
+  },
+  {
+   "path": "src/credential_resolver.py",
+   "size": 6964,
+   "sha256": "36df4eeb9de11d5b"
+  },
+  {
+   "path": "src/database_adapter.py",
+   "size": 49710,
+   "sha256": "c705756438c8c3d0"
+  },
+  {
+   "path": "src/errors.py",
+   "size": 659,
+   "sha256": "ad137b887418c632"
+  },
+  {
+   "path": "src/gateway_supervisor.py",
+   "size": 21145,
+   "sha256": "a6f4da21970bbb02"
+  },
+  {
+   "path": "src/image_decryptor.py",
+   "size": 2933,
+   "sha256": "fcc928f59b7eec9d"
+  },
+  {
+   "path": "src/interactive_ipc.py",
+   "size": 4822,
+   "sha256": "ca552032a5b1316f"
+  },
+  {
+   "path": "src/key_resolver.py",
+   "size": 21517,
+   "sha256": "7197fa82079386e7"
+  },
+  {
+   "path": "src/media_exporter.py",
+   "size": 15937,
+   "sha256": "b6d0c5c880173e6c"
+  },
+  {
+   "path": "src/minimal_foreground_input.py",
+   "size": 4815,
+   "sha256": "738bb85805bea253"
+  },
+  {
+   "path": "src/providers.py",
+   "size": 20913,
+   "sha256": "0608615f03aba457"
+  },
+  {
+   "path": "src/providers_abstraction/__init__.py",
+   "size": 1763,
+   "sha256": "a6fd6ba7d01ac131"
+  },
+  {
+   "path": "src/providers_abstraction/interfaces.py",
+   "size": 10222,
+   "sha256": "4f5fef1c4eb880bb"
+  },
+  {
+   "path": "src/providers_abstraction/registry.py",
+   "size": 2998,
+   "sha256": "6b1f27165e7fbd5c"
+  },
+  {
+   "path": "src/service_api.py",
+   "size": 61407,
+   "sha256": "684107f7014dd0dd"
+  },
+  {
+   "path": "src/text_archiver.py",
+   "size": 11711,
+   "sha256": "56f7bca1564aff19"
+  },
+  {
+   "path": "src/uia_service.py",
+   "size": 77689,
+   "sha256": "d9296fcad0e4cfbe"
+  },
+  {
+   "path": "src/voice_exporter.py",
+   "size": 13858,
+   "sha256": "b2e0cd3e352cc4e8"
+  },
+  {
+   "path": "src/wal_event_source.py",
+   "size": 7240,
+   "sha256": "f926442505f8050d"
+  },
+  {
+   "path": "tests/manual/test_database_read.py",
+   "size": 684,
+   "sha256": "da582f9d9a192e05"
+  },
+  {
+   "path": "tests/manual/test_live_uia.py",
+   "size": 215,
+   "sha256": "fe5f3b1d2a4741e5"
+  },
+  {
+   "path": "tests/manual/test_wechat_e2e.py",
+   "size": 585,
+   "sha256": "65c978ae7bcceac5"
+  },
+  {
+   "path": "tests/test_auto_reply.py",
+   "size": 19466,
+   "sha256": "02a35375b87f98c7"
+  },
+  {
+   "path": "tests/test_control_plane.py",
+   "size": 3416,
+   "sha256": "7679c36067c06631"
+  },
+  {
+   "path": "tests/test_database_plane.py",
+   "size": 18082,
+   "sha256": "4eb53331792754b1"
+  },
+  {
+   "path": "tests/test_foreground_safety.py",
+   "size": 16092,
+   "sha256": "edf118785bbd6e09"
+  },
+  {
+   "path": "tests/test_providers.py",
+   "size": 3224,
+   "sha256": "48f871b95b9ea3cd"
+  },
+  {
+   "path": "tests/test_tool_gateway.py",
+   "size": 8167,
+   "sha256": "93ce9c324491d327"
+  },
+  {
+   "path": "tests/test_uia_reliability.py",
+   "size": 6208,
+   "sha256": "dbc1d7a2fb5372cd"
+  },
+  {
+   "path": "THIRD_PARTY_NOTICES.md",
+   "size": 5509,
+   "sha256": "7ac24068c13c30a8"
+  },
+  {
+   "path": "tools/build_release.py",
+   "size": 17570,
+   "sha256": "c214f88cabe2c19b"
+  },
+  {
+   "path": "wechat_cli.py",
+   "size": 1072,
+   "sha256": "70c5fd2a08e9704a"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/__init__.py",
+   "size": 2176,
+   "sha256": "f56eb37a88bc5ed0"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/__main__.py",
+   "size": 371,
+   "sha256": "f01db753bf9a92c5"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/assets/__init__.py",
+   "size": 81,
+   "sha256": "eeedfa39ffa21c41"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/assets/moments_more_dark.png",
+   "size": 384,
+   "sha256": "b7e8d743fc50b188"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/assets/moments_more_light.png",
+   "size": 340,
+   "sha256": "41fbefcc17be937b"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/assets/moments_send.png",
+   "size": 1923,
+   "sha256": "234e3c0f5cecb632"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/db.py",
+   "size": 91122,
+   "sha256": "a7e77ea7fc5a2d05"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/demo.py",
+   "size": 2004,
+   "sha256": "dbb03a92e3d0eba0"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/demo_db.py",
+   "size": 2855,
+   "sha256": "adb36e4e1835c9d7"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/demo_emoji_capture.py",
+   "size": 3341,
+   "sha256": "6e57fb957323a8cd"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/demo_forward_voice.py",
+   "size": 2644,
+   "sha256": "79fe938f69e085b2"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/demo_group_messages.py",
+   "size": 11989,
+   "sha256": "e084846bb4afb148"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/demo_guia.py",
+   "size": 2715,
+   "sha256": "dac418a79bdf4110"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/demo_listen.py",
+   "size": 3921,
+   "sha256": "8b4e6d0cb7c3d29b"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/demo_media.py",
+   "size": 9159,
+   "sha256": "a8653a222d9171bb"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/demo_moment_find.py",
+   "size": 2927,
+   "sha256": "80ca053cb5163e5c"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/demo_moment_like.py",
+   "size": 1682,
+   "sha256": "7a81fb692c57438b"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/demo_moment_more.py",
+   "size": 2167,
+   "sha256": "d26fa8921dc938b2"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/demo_moments_download.py",
+   "size": 4804,
+   "sha256": "bcc88f1ebb0d505f"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/demo_moments_interact.py",
+   "size": 3708,
+   "sha256": "6df88d543609af18"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/demo_reply_at.py",
+   "size": 2545,
+   "sha256": "563618fed5c9b58d"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/demo_robust.py",
+   "size": 6174,
+   "sha256": "871ed339ced2e8b0"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/demo_send.py",
+   "size": 7729,
+   "sha256": "828d6ca9c24b4d74"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/demo_v109.py",
+   "size": 6408,
+   "sha256": "baff13ddb7cf3f8f"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/diagnose_keys.py",
+   "size": 6150,
+   "sha256": "06e5280bf41c5704"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/exceptions.py",
+   "size": 1702,
+   "sha256": "d32f932bf8ffc446"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/guia.py",
+   "size": 93141,
+   "sha256": "27427449a5b45538"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/languages.py",
+   "size": 15630,
+   "sha256": "c6ddc9851a33e861"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/logger.py",
+   "size": 4601,
+   "sha256": "bc0f1324fa5c370a"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/media.py",
+   "size": 35575,
+   "sha256": "2788c7b8fd491754"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/moment.py",
+   "size": 101455,
+   "sha256": "8446125d445621c9"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/msgs/__init__.py",
+   "size": 1815,
+   "sha256": "3de4bd2f1fe49981"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/msgs/base.py",
+   "size": 9067,
+   "sha256": "a6bb817a09c598d6"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/msgs/friend.py",
+   "size": 3081,
+   "sha256": "6a7596f659eb08fc"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/msgs/mattr.py",
+   "size": 1804,
+   "sha256": "dc12aa2b0b427c41"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/msgs/msg.py",
+   "size": 3998,
+   "sha256": "9b01be40d94c7b4d"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/msgs/mtype.py",
+   "size": 43548,
+   "sha256": "336d76a8314f411d"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/msgs/self.py",
+   "size": 3037,
+   "sha256": "60528117648e9ebb"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/param.py",
+   "size": 2133,
+   "sha256": "1072689b43e9ffed"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/py.typed",
+   "size": 0,
+   "sha256": "e3b0c44298fc1c14"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/sender.py",
+   "size": 6918,
+   "sha256": "d1879a390617187a"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/ui/__init__.py",
+   "size": 674,
+   "sha256": "d2d3ff24eaaf3da0"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/ui/base.py",
+   "size": 1604,
+   "sha256": "1d9782a715a804b5"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/ui/chatbox.py",
+   "size": 14288,
+   "sha256": "b6a8ac334c6b2c59"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/ui/component.py",
+   "size": 10155,
+   "sha256": "c56e432575cfb33d"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/ui/main.py",
+   "size": 8975,
+   "sha256": "23499ab13b589728"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/ui/navigationbox.py",
+   "size": 2185,
+   "sha256": "ab37d756deeaa5fc"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/ui/sessionbox.py",
+   "size": 8211,
+   "sha256": "da8def83e021e700"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/uia/__init__.py",
+   "size": 12800,
+   "sha256": "050f551f15263264"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/uia_driver.py",
+   "size": 65221,
+   "sha256": "6944778de2cd8a1a"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/utils/__init__.py",
+   "size": 673,
+   "sha256": "ae573f9b60ed38a7"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/utils/lock.py",
+   "size": 3774,
+   "sha256": "c7f78e2332e7f91c"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/utils/tools.py",
+   "size": 11169,
+   "sha256": "a52c18675c493ddd"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/utils/win32.py",
+   "size": 11965,
+   "sha256": "c40ae9bef7912119"
+  },
+  {
+   "path": "work/wechatauto_pkg/unzipped/wechatauto/wx.py",
+   "size": 33069,
+   "sha256": "34223612c9c17881"
+  },
+  {
+   "path": "一键启动.cmd",
+   "size": 900,
+   "sha256": "ddd2126accbf256d"
+  },
+  {
+   "path": "健康检查.cmd",
+   "size": 829,
+   "sha256": "17e084fe0576e7b3"
+  }
+ ]
+}

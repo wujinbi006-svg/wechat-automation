@@ -1,0 +1,32 @@
+# 微信自动化工程 —— Python 依赖
+#
+# 安装：
+#     python -m pip install -r requirements.txt
+#
+# 建议 Python 3.11 或更高版本（3.13 实测通过）。
+
+# ---- 核心运行依赖 ----
+fastapi>=0.110                 # HTTP 网关
+uvicorn[standard]>=0.27        # ASGI 服务器
+pydantic>=2.5                  # 请求/配置模型
+websockets>=12.0               # /ws/events 事件流
+psutil>=5.9                    # 进程发现与健康检查
+
+# ---- 解密与数据库 ----
+cryptography>=42.0             # SQLCipher 分页 AES 解密、媒体解密
+zstandard>=0.22                # 会话日志压缩格式
+
+# ---- Windows 自动化（仅 Windows） ----
+uiautomation>=2.0.18           # UI Automation 驱动
+pywin32>=306                   # win32gui / win32con / win32process / win32api
+comtypes>=1.2                  # UIA COM 接口
+
+# ---- 可选：语音消息导出为 WAV ----
+# 不装也能运行，只是 voice_exporter 无法解码 .silk
+# pysilk-mod>=1.3
+# pythonnet>=3.0
+
+# ---- 可选：数据库密钥自动恢复（高级功能） ----
+# 不装则需要手工获取密钥，见 SECRETS.md
+# yara-python>=4.5
+# pymem>=1.13

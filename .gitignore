@@ -1,0 +1,54 @@
+# ============================================================
+#  密钥与个人数据 —— 这些绝不能提交或分享
+# ============================================================
+
+# 运行时数据目录（密钥、解密后的聊天库、缓存、临时文件）
+work/
+
+# 密钥
+database_key_cache.json
+wechat_db_keys.json
+*.wechat-key
+db.key
+
+# 配置里的密钥与个人对象
+config/auto_reply.json
+config/console.json
+config/agent.env
+config/backups/
+
+# 日志（含聊天内容片段）
+logs/
+wechatauto_logs/
+*.log
+@AutomationLog.txt
+gateway_stderr.log
+logs_database_key_status_current.txt
+
+# 构建产物中的敏感内容
+hook/build/*.log
+hook/build/*.pdb
+hook/build/*.pkl
+
+# 发布产物
+dist/
+
+# ============================================================
+#  常规忽略
+# ============================================================
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+*.egg-info/
+.vscode/
+.idea/
+*.swp
+*.tmp
+.DS_Store
+Thumbs.db

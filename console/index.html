@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>微信自动回复控制台</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: { extend: { colors: {
+    ink: { 900:'#0b0f14', 800:'#111823', 700:'#18212f', 600:'#1f2937', 500:'#2a3646' },
+    accent: { DEFAULT:'#22c55e', dim:'#16a34a' }
+  }}}
+}
+</script>
+<style>
+  html,body{background:#0b0f14}
+  ::-webkit-scrollbar{width:10px;height:10px}
+  ::-webkit-scrollbar-thumb{background:#2a3646;border-radius:6px}
+  ::-webkit-scrollbar-track{background:#0b0f14}
+  .card{background:#111823;border:1px solid #1f2937}
+  .fade-in{animation:fi .25s ease-out}
+  @keyframes fi{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .pulse-dot{box-shadow:0 0 0 0 rgba(34,197,94,.7);animation:pd 2s infinite}
+  @keyframes pd{70%{box-shadow:0 0 0 8px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+</style>
+</head>
+<body class="text-slate-200 min-h-screen">
+
+<div class="max-w-6xl mx-auto px-5 py-7">
+
+  <!-- header -->
+  <header class="flex items-center justify-between mb-7">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/30 grid place-items-center">
+        <svg class="w-5 h-5 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+        </svg>
+      </div>
+      <div>
+        <h1 class="text-lg font-semibold leading-tight">微信自动回复控制台</h1>
+        <p class="text-xs text-slate-500">独立运行 · 不依赖 DSH 会话</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-3">
+      <div id="gwBadge" class="text-xs px-2.5 py-1 rounded-full border border-slate-700 text-slate-400">网关检测中…</div>
+      <button onclick="loadState()" class="text-xs px-3 py-1.5 rounded-lg bg-ink-700 hover:bg-ink-600 border border-slate-700 transition">刷新</button>
+    </div>
+  </header>
+
+  <!-- global -->
+  <section class="card rounded-2xl p-5 mb-5">
+    <div class="flex items-center justify-between flex-wrap gap-4">
+      <div class="flex items-center gap-4">
+        <div id="globalDot" class="w-3 h-3 rounded-full bg-slate-600"></div>
+        <div>
+          <div class="font-medium">自动回复总开关</div>
+          <div id="globalDesc" class="text-xs text-slate-500 mt-0.5">加载中…</div>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <button id="btnOn"  onclick="toggleGlobal(true)"  class="px-5 py-2 rounded-xl text-sm font-medium bg-emerald-600 hover:bg-emerald-500 transition disabled:opacity-40">开启</button>
+        <button id="btnOff" onclick="toggleGlobal(false)" class="px-5 py-2 rounded-xl text-sm font-medium bg-slate-700 hover:bg-slate-600 transition disabled:opacity-40">关闭</button>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-5">
+      <div class="rounded-xl bg-ink-800 border border-slate-800 p-3">
+        <div class="text-[11px] text-slate-500">收到事件</div>
+        <div id="cReceived" class="text-xl font-semibold mt-1">–</div>
+      </div>
+      <div class="rounded-xl bg-ink-800 border border-slate-800 p-3">
+        <div class="text-[11px] text-slate-500">已回复</div>
+        <div id="cSent" class="text-xl font-semibold mt-1 text-emerald-400">–</div>
+      </div>
+      <div class="rounded-xl bg-ink-800 border border-slate-800 p-3">
+        <div class="text-[11px] text-slate-500">失败</div>
+        <div id="cFailed" class="text-xl font-semibold mt-1 text-rose-400">–</div>
+      </div>
+      <div class="rounded-xl bg-ink-800 border border-slate-800 p-3">
+        <div class="text-[11px] text-slate-500">队列</div>
+        <div id="cQueue" class="text-xl font-semibold mt-1">–</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="grid lg:grid-cols-2 gap-5">
+
+    <!-- targets -->
+    <section class="card rounded-2xl p-5">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="font-medium">自动回复对象</h2>
+        <span id="tCount" class="text-xs text-slate-500"></span>
+      </div>
+      <div id="targetList" class="space-y-3"></div>
+
+      <!-- add -->
+      <div class="mt-5 pt-5 border-t border-slate-800">
+        <div class="text-sm font-medium mb-3">添加对象</div>
+        <div class="flex flex-wrap gap-2 mb-2">
+          <input id="newName" placeholder="好友备注名，如 好友B"
+                 class="flex-1 min-w-[160px] px-3 py-2 rounded-lg bg-ink-800 border border-slate-700 text-sm focus:border-emerald-500 outline-none" />
+          <button onclick="pickSession()" class="px-3 py-2 rounded-lg bg-ink-700 hover:bg-ink-600 border border-slate-700 text-sm transition">从会话选</button>
+          <button onclick="resolveName()" class="px-3 py-2 rounded-lg bg-ink-700 hover:bg-ink-600 border border-slate-700 text-sm transition">查 wxid</button>
+        </div>
+        <div id="resolveOut" class="text-xs text-slate-500 mb-2 min-h-[16px]"></div>
+        <input id="newPersona" placeholder="人设（可选，如：同学，说话随意简短）"
+               class="w-full px-3 py-2 rounded-lg bg-ink-800 border border-slate-700 text-sm focus:border-emerald-500 outline-none mb-2" />
+        <input id="newAliases" placeholder="wxid（可选，留空自动解析）"
+               class="w-full px-3 py-2 rounded-lg bg-ink-800 border border-slate-700 text-sm focus:border-emerald-500 outline-none mb-3 font-mono text-xs" />
+        <button onclick="addTarget()" class="w-full py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-sm font-medium transition">添加并生效</button>
+      </div>
+    </section>
+
+    <!-- right column -->
+    <div class="space-y-5">
+      <!-- recent -->
+      <section class="card rounded-2xl p-5">
+        <h2 class="font-medium mb-3">最近决策</h2>
+        <div id="recentList" class="space-y-2 max-h-72 overflow-y-auto"></div>
+      </section>
+
+      <!-- settings -->
+      <section class="card rounded-2xl p-5">
+        <h2 class="font-medium mb-3">运行参数</h2>
+        <div id="settingsBox" class="text-sm space-y-2 text-slate-400"></div>
+      </section>
+
+      <!-- api key -->
+      <section class="card rounded-2xl p-5">
+        <h2 class="font-medium mb-1">API Key</h2>
+        <p class="text-xs text-slate-500 mb-3">仅保存在服务端 config/console.json，不会下发到浏览器。</p>
+        <div class="flex gap-2">
+          <input id="apiKey" type="password" placeholder="sk-..."
+                 class="flex-1 px-3 py-2 rounded-lg bg-ink-800 border border-slate-700 text-sm focus:border-emerald-500 outline-none font-mono" />
+          <button onclick="saveApiKey()" class="px-4 py-2 rounded-lg bg-ink-700 hover:bg-ink-600 border border-slate-700 text-sm transition">保存</button>
+        </div>
+        <div id="apiKeyState" class="text-xs text-slate-500 mt-2"></div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<!-- toast -->
+<div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 px-4 py-2.5 rounded-xl text-sm opacity-0 pointer-events-none transition-all duration-300"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+let STATE = null;
+
+function toast(msg, ok = true) {
+  const t = $('toast');
+  t.textContent = msg;
+  t.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 px-4 py-2.5 rounded-xl text-sm transition-all duration-300 ' +
+    (ok ? 'bg-emerald-600 text-white' : 'bg-rose-600 text-white');
+  t.style.opacity = '1';
+  t.style.transform = 'translate(-50%, -8px)';
+  clearTimeout(t._h);
+  t._h = setTimeout(() => { t.style.opacity = '0'; t.style.transform = 'translate(-50%, 0)'; }, 2600);
+}
+
+async function api(path, method = 'GET', body) {
+  const opt = { method, headers: { 'Content-Type': 'application/json' } };
+  if (body !== undefined) opt.body = JSON.stringify(body);
+  const r = await fetch(path, opt);
+  return r.json();
+}
+
+async function loadState() {
+  try {
+    STATE = await api('/api/state');
+    render();
+  } catch (e) { toast('读取失败：' + e.message, false); }
+}
+
+function render() {
+  if (!STATE || !STATE.ok) return;
+  const c = STATE.config, g = STATE.gateway;
+
+  // gateway badge
+  const gb = $('gwBadge');
+  if (g.online) { gb.textContent = '网关在线'; gb.className = 'text-xs px-2.5 py-1 rounded-full border border-emerald-600/40 text-emerald-400 bg-emerald-500/10'; }
+  else { gb.textContent = '网关离线'; gb.className = 'text-xs px-2.5 py-1 rounded-full border border-rose-600/40 text-rose-400 bg-rose-500/10'; }
+
+  // global
+  const on = c.enabled;
+  $('globalDot').className = 'w-3 h-3 rounded-full ' + (on ? 'bg-emerald-500 pulse-dot' : 'bg-slate-600');
+  $('globalDesc').textContent = on
+    ? `运行中 · 模型 ${c.model} · 静默时段 ${(c.quiet_hours||[]).map(w=>w.join('-')).join(', ') || '无'}`
+    : '已停止，不会回复任何消息';
+  $('btnOn').disabled = on;
+  $('btnOff').disabled = !on;
+
+  const k = g.counters || {};
+  $('cReceived').textContent = k.received ?? '–';
+  $('cSent').textContent = k.sent ?? '–';
+  $('cFailed').textContent = k.failed ?? '–';
+  $('cQueue').textContent = g.queue_depth ?? '–';
+
+  // targets
+  $('tCount').textContent = `${c.targets.length} 个`;
+  $('targetList').innerHTML = c.targets.length ? c.targets.map((t, i) => `
+    <div class="fade-in rounded-xl bg-ink-800 border ${t.enabled ? 'border-emerald-600/30' : 'border-slate-800'} p-3">
+      <div class="flex items-center justify-between gap-2">
+        <div class="flex items-center gap-2 min-w-0">
+          <span class="w-2 h-2 rounded-full ${t.enabled ? 'bg-emerald-500' : 'bg-slate-600'} shrink-0"></span>
+          <span class="font-medium truncate">${esc(t.name)}</span>
+          <span class="text-[10px] px-1.5 py-0.5 rounded ${t.enabled?'bg-emerald-500/15 text-emerald-400':'bg-slate-700 text-slate-400'}">${t.enabled?'已开启':'已暂停'}</span>
+          ${t.memory ? '<span class="text-[10px] px-1.5 py-0.5 rounded bg-sky-500/15 text-sky-400">有记忆</span>' : ''}
+        </div>
+        <div class="flex items-center gap-1.5 shrink-0">
+          <button onclick="toggleEdit(${i})" class="text-xs px-2.5 py-1 rounded-lg bg-ink-700 hover:bg-ink-600 border border-slate-700 transition">编辑</button>
+          <button onclick="toggleTarget('${esc(t.name)}', ${!t.enabled})"
+                  class="text-xs px-2.5 py-1 rounded-lg ${t.enabled?'bg-slate-700 hover:bg-slate-600':'bg-emerald-600 hover:bg-emerald-500'} transition">
+            ${t.enabled?'暂停':'开启'}
+          </button>
+          <button onclick="removeTarget('${esc(t.name)}')"
+                  class="text-xs px-2.5 py-1 rounded-lg bg-ink-700 hover:bg-rose-600/80 border border-slate-700 transition">删除</button>
+        </div>
+      </div>
+      <div class="text-[11px] text-slate-500 mt-1.5 font-mono truncate">${t.aliases.length? esc(t.aliases.join(', ')) : '（无 wxid，可能漏消息）'}</div>
+      ${t.persona ? `<div class="text-[11px] text-slate-400 mt-1">🎭 ${esc(t.persona)}</div>` : ''}
+      ${t.memory ? `<div class="text-[11px] text-slate-400 mt-1">🧠 ${esc(t.memory).slice(0,80)}${t.memory.length>80?'…':''}</div>` : ''}
+
+      <div id="edit-${i}" class="hidden mt-3 pt-3 border-t border-slate-700 space-y-2">
+        <div>
+          <label class="text-[11px] text-slate-500">备注名（UIA 搜索用）</label>
+          <input id="e-name-${i}" value="${esc(t.name)}"
+                 class="w-full mt-1 px-2.5 py-1.5 rounded-lg bg-ink-900 border border-slate-700 text-sm focus:border-emerald-500 outline-none" />
+        </div>
+        <div>
+          <label class="text-[11px] text-slate-500">wxid（逗号分隔）</label>
+          <input id="e-alias-${i}" value="${esc(t.aliases.join(', '))}"
+                 class="w-full mt-1 px-2.5 py-1.5 rounded-lg bg-ink-900 border border-slate-700 text-xs font-mono focus:border-emerald-500 outline-none" />
+        </div>
+        <div>
+          <label class="text-[11px] text-slate-500">人格 · 说话风格（怎么说）</label>
+          <textarea id="e-persona-${i}" rows="2"
+                    class="w-full mt-1 px-2.5 py-1.5 rounded-lg bg-ink-900 border border-slate-700 text-sm focus:border-emerald-500 outline-none resize-y">${esc(t.persona)}</textarea>
+        </div>
+        <div>
+          <label class="text-[11px] text-slate-500">长期记忆 · 你记得的关于他的事（说什么）</label>
+          <textarea id="e-memory-${i}" rows="3" placeholder="例：我室友，住 302；最近在准备考研；不吃辣；别问他感情的事"
+                    class="w-full mt-1 px-2.5 py-1.5 rounded-lg bg-ink-900 border border-slate-700 text-sm focus:border-emerald-500 outline-none resize-y">${esc(t.memory)}</textarea>
+        </div>
+        <div class="flex gap-2">
+          <div class="flex-1">
+            <label class="text-[11px] text-slate-500">单条字数上限</label>
+            <input id="e-chars-${i}" type="number" value="${t.max_chars}"
+                   class="w-full mt-1 px-2.5 py-1.5 rounded-lg bg-ink-900 border border-slate-700 text-sm focus:border-emerald-500 outline-none" />
+          </div>
+          <div class="flex-1">
+            <label class="text-[11px] text-slate-500">读取历史条数（0=全局）</label>
+            <input id="e-hist-${i}" type="number" value="${t.history_limit}"
+                   class="w-full mt-1 px-2.5 py-1.5 rounded-lg bg-ink-900 border border-slate-700 text-sm focus:border-emerald-500 outline-none" />
+          </div>
+        </div>
+        <div class="flex gap-2 pt-1">
+          <button onclick="saveTarget(${i}, '${esc(t.name)}')"
+                  class="flex-1 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-sm font-medium transition">保存</button>
+          <button onclick="toggleEdit(${i})"
+                  class="px-4 py-2 rounded-lg bg-ink-700 hover:bg-ink-600 border border-slate-700 text-sm transition">取消</button>
+        </div>
+      </div>
+    </div>`).join('') : '<div class="text-sm text-slate-500 py-6 text-center">还没有添加任何对象</div>';
+
+  // recent
+  const rec = g.recent || [];
+  $('recentList').innerHTML = rec.length ? rec.slice().reverse().map(r => {
+    const badge = { sent:'bg-emerald-500/15 text-emerald-400', failed:'bg-rose-500/15 text-rose-400',
+                    dry_run:'bg-sky-500/15 text-sky-400', takeover:'bg-amber-500/15 text-amber-400' }[r.action] || 'bg-slate-700 text-slate-400';
+    return `<div class="fade-in rounded-lg bg-ink-800 border border-slate-800 p-2.5">
+      <div class="flex items-center gap-2 mb-1">
+        <span class="text-[10px] px-1.5 py-0.5 rounded ${badge}">${esc(r.action)}</span>
+        <span class="text-xs font-medium">${esc(r.chat_name || r.rule || '')}</span>
+      </div>
+      ${r.inbound?.length ? `<div class="text-[11px] text-slate-500 truncate">← ${esc(r.inbound.join(' / '))}</div>` : ''}
+      ${r.reply ? `<div class="text-[11px] text-slate-300 truncate">→ ${esc(r.reply)}</div>` : ''}
+    </div>`;
+  }).join('') : '<div class="text-sm text-slate-500 py-6 text-center">暂无记录</div>';
+
+  // settings
+  $('settingsBox').innerHTML = `
+    <div class="flex justify-between"><span>运行模式</span><span class="${c.dry_run?'text-amber-400':'text-emerald-400'}">${c.dry_run?'试运行（不发送）':'真实发送'}</span></div>
+    <div class="flex justify-between"><span>静默时段</span><span>${(c.quiet_hours||[]).map(w=>w.join(' – ')).join(' / ') || '无'}</span></div>
+    <div class="flex justify-between"><span>机主接管静默</span><span>${c.human_override_minutes} 分钟</span></div>
+    <div class="flex justify-between"><span>配置文件</span><span class="font-mono text-[11px]">config/auto_reply.json</span></div>`;
+
+  // api key
+  const cc = STATE.console;
+  $('apiKeyState').innerHTML = cc.api_key_set
+    ? `已设置 <span class="font-mono">${esc(cc.api_key_masked)}</span> · ${esc(cc.api_base||'')}`
+    : '<span class="text-amber-400">未设置</span>';
+}
+
+function esc(s) {
+  return String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+async function toggleGlobal(enabled) {
+  const r = await api('/api/toggle-global', 'POST', { enabled });
+  toast(r.ok ? (enabled ? '已开启自动回复' : '已停止自动回复') : '操作失败', r.ok);
+  loadState();
+}
+
+async function toggleTarget(name, enabled) {
+  const r = await api('/api/toggle-target', 'POST', { name, enabled });
+  toast(r.ok ? `${name} 已${enabled?'开启':'暂停'}` : '操作失败', r.ok);
+  loadState();
+}
+
+async function removeTarget(name) {
+  if (!confirm(`确定删除「${name}」？`)) return;
+  const r = await api('/api/remove-target', 'POST', { name });
+  toast(r.ok ? `已删除 ${name}` : '删除失败', r.ok);
+  loadState();
+}
+
+async function addTarget() {
+  const name = $('newName').value.trim();
+  if (!name) return toast('请填写备注名', false);
+  const r = await api('/api/add-target', 'POST', {
+    name,
+    persona: $('newPersona').value.trim(),
+    aliases: $('newAliases').value.trim(),
+  });
+  toast(r.ok ? `已添加 ${name}` : ('添加失败：' + (r.error || '')), r.ok);
+  if (r.ok) { $('newName').value = ''; $('newPersona').value = ''; $('newAliases').value = ''; $('resolveOut').textContent = ''; }
+  loadState();
+}
+
+async function resolveName() {
+  const name = $('newName').value.trim();
+  if (!name) return toast('先填备注名', false);
+  $('resolveOut').textContent = '解析中…';
+  const r = await api('/api/resolve', 'POST', { name });
+  if (r.ok) {
+    $('resolveOut').innerHTML = `找到 wxid：<span class="font-mono text-emerald-400">${esc(r.wxid)}</span>`;
+    if (!$('newAliases').value) $('newAliases').value = r.wxid;
+  } else {
+    $('resolveOut').innerHTML = `<span class="text-rose-400">未找到</span>`;
+  }
+}
+
+async function pickSession() {
+  const r = await api('/api/sessions');
+  if (!r.ok || !r.sessions?.length) return toast('没有可用会话', false);
+  const names = r.sessions.map((s, i) => `${i + 1}. ${s.name}`).join('\n');
+  const pick = prompt('选择会话（输入序号）：\n\n' + names);
+  const idx = parseInt(pick, 10) - 1;
+  if (idx >= 0 && idx < r.sessions.length) {
+    $('newName').value = r.sessions[idx].name;
+    toast('已填入：' + r.sessions[idx].name);
+  }
+}
+
+async function saveApiKey() {
+  const k = $('apiKey').value.trim();
+  if (!k) return toast('请输入 key', false);
+  const r = await api('/api/console-config', 'POST', { api_key: k });
+  toast(r.ok ? 'API Key 已保存（仅服务端）' : '保存失败', r.ok);
+  $('apiKey').value = '';
+  loadState();
+}
+
+// ---- 编辑已有对象 ----
+const openEdits = new Set();
+
+function toggleEdit(i) {
+  const box = $(`edit-${i}`);
+  if (!box) return;
+  const willOpen = box.classList.contains('hidden');
+  if (willOpen) { box.classList.remove('hidden'); openEdits.add(i); }
+  else { box.classList.add('hidden'); openEdits.delete(i); }
+}
+
+async function saveTarget(i, originalName) {
+  const body = {
+    name: originalName,
+    new_name: $(`e-name-${i}`).value.trim(),
+    aliases: $(`e-alias-${i}`).value.trim(),
+    persona: $(`e-persona-${i}`).value,
+    memory: $(`e-memory-${i}`).value,
+    max_chars: parseInt($(`e-chars-${i}`).value || '120', 10),
+    history_limit: parseInt($(`e-hist-${i}`).value || '0', 10),
+  };
+  if (!body.new_name) return toast('备注名不能为空', false);
+  const r = await api('/api/update-target', 'POST', body);
+  toast(r.ok ? '已保存并生效' : ('保存失败：' + (r.error || '')), r.ok);
+  if (r.ok) openEdits.delete(i);
+  loadState();
+}
+
+loadState();
+// 轮询时保留正在编辑的面板，避免刷新把它合上
+setInterval(() => { if (openEdits.size === 0) loadState(); else loadLatest(); }, 5000);
+
+async function loadLatest() {
+  // 轻量刷新：只更新统计与最近决策，不重绘对象列表
+  try {
+    const s = await api('/api/state');
+    if (!s || !s.ok) return;
+    STATE = s;
+    const g = s.gateway, k = g.counters || {};
+    $('cReceived').textContent = k.received ?? '–';
+    $('cSent').textContent = k.sent ?? '–';
+    $('cFailed').textContent = k.failed ?? '–';
+    $('cQueue').textContent = g.queue_depth ?? '–';
+    const gb = $('gwBadge');
+    gb.textContent = g.online ? '网关在线' : '网关离线';
+    gb.className = 'text-xs px-2.5 py-1 rounded-full border ' + (g.online
+      ? 'border-emerald-600/40 text-emerald-400 bg-emerald-500/10'
+      : 'border-rose-600/40 text-rose-400 bg-rose-500/10');
+  } catch (e) { /* 静默 */ }
+}
+</script>
+</body>
+</html>

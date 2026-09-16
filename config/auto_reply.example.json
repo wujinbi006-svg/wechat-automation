@@ -1,0 +1,71 @@
+{
+  "_comment": "模板文件。复制成 config/auto_reply.json 再改（setup.py 会自动复制）。起步请保持 enabled=false 或 dry_run=true。",
+  "_howto": "1) 填 targets[].name 与 aliases；2) 配 LLM（base_url / api_key / model）；3) 保持 dry_run=true 观察一天；4) dry_run 改 false 后 POST /auto-reply/reload 生效。",
+  "_llm_hint": "任何 OpenAI 兼容端点都能用。DeepSeek: base_url=https://api.deepseek.com/v1, model=deepseek-flash。本地 Ollama: http://127.0.0.1:11434/v1, api_key 随便填。",
+
+  "enabled": false,
+  "dry_run": true,
+
+  "debounce_seconds": 4.0,
+  "debounce_max_wait_seconds": 25.0,
+  "min_delay_seconds": 0.5,
+  "max_delay_seconds": 2.5,
+  "min_interval_seconds": 20.0,
+
+  "conversation_window_minutes": 30,
+  "max_replies_per_conversation": 12,
+  "max_replies_global_per_minute": 8,
+
+  "quiet_hours": [["23:30", "08:00"]],
+  "human_override_minutes": 15,
+
+  "max_consecutive_auto_replies": 6,
+  "mute_minutes": 60,
+  "bot_burst_count": 8,
+  "bot_burst_seconds": 30,
+
+  "signature": "",
+  "history_limit": 12,
+  "replay_grace_seconds": 120,
+
+  "llm_timeout_seconds": 60,
+  "llm_temperature": 0.85,
+  "llm_base_url": "https://api.deepseek.com/v1",
+  "llm_api_key": "PUT-YOUR-API-KEY-HERE",
+  "llm_model": "deepseek-flash",
+  "llm_fallback_models": [],
+  "_llm_tokens_hint": "llm_max_tokens 是单次生成上限。DeepSeek 的 flash / v4-pro 都是推理模型：思考过程与正文共用这份预算，预算偏小时思考会把正文挤没，接口返回 finish_reason=length 且 content 为空 —— 表现为「AI 间歇性不回复」。给一个宽上限（10 万）即可，模型会自行提前结束，不会真的写满。",
+  "llm_max_tokens": 100000,
+  "_llm_reasoning_hint": "llm_reasoning_effort 控制推理强度，合法值 none/minimal/low/medium/high/xhigh/max（没有 off）。推荐 low：回复明显更接得住话题。前提是 llm_max_tokens 给足——推理与正文共用这份预算，预算偏小（例如按 max_chars*3 算出的几百）时思考会把正文挤空，接口返回 finish_reason=length 且 content 为空，表现为「AI 间歇性不回复」。实测 low 只用 80~140 个 token，10 万预算绰绰有余。若想彻底关掉推理可填 none（更省更快，但答得浅）。",
+  "llm_reasoning_effort": "low",
+
+  "assume_inbound_when_unknown": false,
+
+  "system_prompt": "你在替机主本人回复微信好友，用机主的口吻、简短、口语、不解释自己是 AI。只输出要发出去的那条消息正文，不要加引号、不要加前缀、不要分行。绝对不要输出 [图片] [动画表情] [表情] [语音] 这类方括号占位符——想表达情绪就直接写文字或用一个 emoji。不确定的事实不要编造（时间、数字、承诺、地点）；拿不准就回一句很短、留有余地的话。不要连续追问，不要长篇大论。",
+
+  "targets": [
+    {
+      "name": "好友备注名",
+      "_note": "name 是交给 UIA 搜索框的名字，必须能唯一命中。aliases 补上 wxid —— WAL 事件的 chat_name 有时直接就是 wxid，只写备注名会整个漏掉这个会话。",
+      "aliases": ["wxid_替换成该好友的wxid"],
+      "enabled": false,
+      "persona": "同龄好友，平时说话短、随手、口语化，会互相开玩笑，不用书面语，不用「首先/其次」这类结构词。",
+      "memory": "这里填你本来就记得的关于这个人的事：关系、称呼、喜好、近况、禁忌话题。例如：我同学，喜欢喝奶茶，最近在准备期末考试，说话比较直，别太客气。",
+      "max_chars": 120,
+      "history_limit": 0,
+      "allow_group": false
+    },
+    {
+      "name": "工作对象的备注名",
+      "aliases": ["wxid_另一个人的wxid"],
+      "enabled": false,
+      "_note": "工作对象建议加硬约束：把不可编造的内容固定成话术。",
+      "persona": "礼貌、简短、不闲聊。",
+      "memory": "对方是合作方联系人，只谈工作。",
+      "system_prompt": "对方是工作客户，语气礼貌正式，回复控制在两句话以内。涉及报价、合同、时间承诺一律回复：我确认一下稍后回你。",
+      "max_chars": 200,
+      "history_limit": 0,
+      "allow_group": false
+    }
+  ]
+}
